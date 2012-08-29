@@ -3,7 +3,7 @@
         "id": "edit",
         "children":
         [
-                    { "command": "copy_with_line_numbers", "caption": "Copy with line numbers" }
+                    { "command": "copy_with_line_numbers", "caption": "Copy With Line Numbers" }
         ]
     }
 ]
