@@ -1,0 +1,9 @@
+[
+    {
+        "id": "edit",
+        "children":
+        [
+                    { "command": "copy_with_line_numbers", "caption": "Copy with line numbers" }
+        ]
+    }
+]
