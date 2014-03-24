@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd copy_with_line_numbers
+echo "{\"url\": \"https://github.com/freeella/copy_with_line_numbers.sublime-package\", \"version\": \"`date "+%Y.%m.%d.%H.%M.%S"`\", \"description\": \"A sublime package to copy text with files name and numbers\"}" >package-metadata.json
 zip ../Copy\ With\ Line\ Numbers.sublime-package *
 
 TARGETFOLDER=/tmp
