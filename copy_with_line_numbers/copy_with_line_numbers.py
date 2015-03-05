@@ -31,11 +31,11 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
         isFollowupSelection = None
         for selection in sels:
             if isFollowupSelection:
-            	# split multi selections with ---
-            	output += "---\n"
+                # split multi selections with ---
+                output += "---\n"
             else:
-            	# but not the first one
-            	isFollowupSelection = True
+                # but not the first one
+                isFollowupSelection = True
             # for each selection
             selection = self.view.line(selection)  # Extend selection to full lines
             first_line_num = self.get_line_num(selection.begin())
