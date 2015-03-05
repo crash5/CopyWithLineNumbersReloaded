@@ -4,6 +4,33 @@
         "children":
         [
                     { "command": "copy_with_line_numbers", "caption": "Copy With Line Numbers" }
+        ],
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "Copy With Line Numbers",
+                        "children":
+                        [
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/Copy With Line Numbers/copy_with_line_numbers.sublime-settings"},
+                                "caption": "Settings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/User/copy_with_line_numbers.sublime-settings"},
+                                "caption": "Settings – User"
+                            },
+                        ]
+                    }
+                ]
+            }
         ]
     }
 ]
