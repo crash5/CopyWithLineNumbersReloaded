@@ -10,9 +10,17 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
         relative_path = settings.get("copy_relative_filepath", False)
         # set file name
         if view.file_name():
-        	output = "File: " + view.file_name() + "\n"
+            filename = view.file_name()
+            if view.window().folders() and relative_path:
+                # Use relative file name
+                folders = view.window().folders()
+                for folder in folders:
+                    if folder in filename:
+                        filename = filename.replace(folder, '')
+                        break
+            output = "File: " + filename + "\n"
         else:
-        	output = "File: <unsaved>\n"
+            output = "File: <unsaved>\n"
 
         # To print all the line numbers with the same lenght
         max_line_num = self.get_line_num(sels[-1].end())
