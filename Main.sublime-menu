@@ -3,8 +3,10 @@
         "id": "edit",
         "children":
         [
-                    { "command": "copy_with_line_numbers", "caption": "Copy With Line Numbers" }
-        ],
+            { "caption": "Copy With Line Numbers", "command": "copy_with_line_numbers" }
+        ]
+    },
+    {
         "id": "preferences",
         "children":
         [
