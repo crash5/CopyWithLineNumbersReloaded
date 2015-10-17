@@ -1,0 +1,17 @@
+[
+    { "caption": "Edit: Copy With Line Numbers", "command": "copy_with_line_numbers" },
+    {
+        "caption": "Preferences: Copy With Line Numbers Settings - Default",
+        "command": "open_file",
+        "args": {
+            "file": "${packages}/Copy With Line Numbers/copy_with_line_numbers.sublime-settings"
+        }
+    },
+    {
+        "caption": "Preferences: Copy With Line Numbers Settings - User",
+        "command": "open_file",
+        "args": {
+            "file": "${packages}/User/copy_with_line_numbers.sublime-settings"
+        }
+    }
+]
