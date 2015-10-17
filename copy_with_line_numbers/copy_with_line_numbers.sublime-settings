@@ -1,0 +1,4 @@
+{
+     // When copying filename, use path relative to open folder
+    "copy_relative_filepath": false,
+}

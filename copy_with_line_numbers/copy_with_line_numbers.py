@@ -6,11 +6,21 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
         view = sublime.Window.active_view(sublime.active_window())
         sels = self.view.sel()
 
+        settings = sublime.load_settings("copy_with_line_numbers.sublime-settings")
+        relative_path = settings.get("copy_relative_filepath", False)
         # set file name
         if view.file_name():
-        	output = "File: " + view.file_name() + "\n"
+            filename = view.file_name()
+            if view.window().folders() and relative_path:
+                # Use relative file name
+                folders = view.window().folders()
+                for folder in folders:
+                    if folder in filename:
+                        filename = filename.replace(folder, '')
+                        break
+            output = "File: " + filename + "\n"
         else:
-        	output = "File: <unsaved>\n"
+            output = "File: <unsaved>\n"
 
         # To print all the line numbers with the same lenght
         max_line_num = self.get_line_num(sels[-1].end())
@@ -21,11 +31,11 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
         isFollowupSelection = None
         for selection in sels:
             if isFollowupSelection:
-            	# split multi selections with ---
-            	output += "---\n"
+                # split multi selections with ---
+                output += "---\n"
             else:
-            	# but not the first one
-            	isFollowupSelection = True
+                # but not the first one
+                isFollowupSelection = True
             # for each selection
             selection = self.view.line(selection)  # Extend selection to full lines
             first_line_num = self.get_line_num(selection.begin())
