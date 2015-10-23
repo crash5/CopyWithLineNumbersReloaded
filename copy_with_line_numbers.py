@@ -6,7 +6,7 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
         view = sublime.Window.active_view(sublime.active_window())
         sels = self.view.sel()
 
-        settings = sublime.load_settings("copy_with_line_numbers.sublime-settings")
+        settings = sublime.load_settings("CopyWithLineNumbersReloaded.sublime-settings")
         relative_path = settings.get("copy_relative_filepath", False)
         # set file name
         if view.file_name():

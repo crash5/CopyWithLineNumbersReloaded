@@ -21,12 +21,12 @@
                         [
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/Copy With Line Numbers/copy_with_line_numbers.sublime-settings"},
+                                "args": {"file": "${packages}/CopyWithLineNumbersReloaded/CopyWithLineNumbersReloaded.sublime-settings"},
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/User/copy_with_line_numbers.sublime-settings"},
+                                "args": {"file": "${packages}/User/CopyWithLineNumbersReloaded.sublime-settings"},
                                 "caption": "Settings – User"
                             },
                         ]
