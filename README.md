@@ -8,3 +8,5 @@ File: /home/dev/projects/CopyWithLineNumbersReloaded/README.md
 1: Use codes from:
 2:  - https://github.com/freeella/copy_with_line_numbers.sublime-package
 ```
+
+See LICENSE for license info
