@@ -1,4 +1,4 @@
-# Copy With Line Numbers Reloaded - Sublime Text Package
+# Copy With Line Numbers Reloaded
 
 Use codes from:
  - https://github.com/freeella/copy_with_line_numbers.sublime-package
