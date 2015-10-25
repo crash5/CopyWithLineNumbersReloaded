@@ -1,4 +1,9 @@
 {
      // When copying filename, use path relative to open folder
     "copy_relative_filepath": false,
+    // Every line number in same length (prefix with 0 (zero): 09, 10, 11, ...)
+    "same_length_line_number": true,
+    // File path in the first line (File: /home/dev/readme.txt)
+    "print_filepath_header": true,
+    "multi_selection_separator": "---",
 }
