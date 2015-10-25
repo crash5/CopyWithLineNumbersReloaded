@@ -1,5 +1,5 @@
-import sublime, sublime_plugin
-import os
+import sublime
+import sublime_plugin
 
 class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
     def run(self, edit):
