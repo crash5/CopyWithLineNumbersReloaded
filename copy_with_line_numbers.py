@@ -4,7 +4,7 @@ import os
 class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = sublime.Window.active_view(sublime.active_window())
-        selections = self.view.sel()
+        selections = view.sel()
         fileName = view.file_name()
 
         # Settings
@@ -37,9 +37,9 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
                 # but not the first one
                 isFollowupSelection = True
             # for each selection
-            selection = self.view.line(selection)  # Extend selection to full line
+            selection = view.line(selection)  # Extend selection to full line
             firstLineNumberInSelection = self.getLineNumber(selection.begin())
-            linesInSelection = self.view.substr(selection).split("\n")  # Considers all line breaks
+            linesInSelection = view.substr(selection).split("\n")  # Considers all line breaks
             for i, line in enumerate(linesInSelection):
                 output += outputLineFormatString % (firstLineNumberInSelection + i, line)
 
