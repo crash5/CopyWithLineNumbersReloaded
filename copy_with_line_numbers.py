@@ -4,32 +4,32 @@ import os
 class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = sublime.Window.active_view(sublime.active_window())
-        sels = self.view.sel()
+        selections = self.view.sel()
+        fileName = view.file_name()
 
+        # Settings
         settings = sublime.load_settings("CopyWithLineNumbersReloaded.sublime-settings")
-        relative_path = settings.get("copy_relative_filepath", False)
-        # set file name
-        if view.file_name():
-            filename = view.file_name()
-            if view.window().folders() and relative_path:
-                # Use relative file name
-                folders = view.window().folders()
-                for folder in folders:
-                    if folder in filename:
-                        filename = filename.replace(folder, '')
-                        break
-            output = "File: " + filename + "\n"
-        else:
-            output = "File: <unsaved>\n"
+        relativeFilePath = settings.get("copy_relative_filepath", False)
 
-        # To print all the line numbers with the same lenght
-        max_line_num = self.get_line_num(sels[-1].end())
-        max_line_num_len = len(str(max_line_num))
-        format_string = "%0" + str(max_line_num_len) + "d: %s\n"
+        # Set file name
+        if fileName:
+            folders = view.window().folders()
+            if folders and relativeFilePath:
+                fileName = self.removeAbsolutePath(fileName, folders)
+            outputFileName = fileName
+        else:
+            outputFileName = "<unsaved>"
+
+        output = "File: " + outputFileName + "\n"
+
+        # To print all the line numbers with the same length
+        largestLineNumber = self.getLineNumber(selections[-1].end())
+        largestLineNumberLength = len(str(largestLineNumber))
+        outputLineFormatString = "%0" + str(largestLineNumberLength) + "d: %s\n"
 
         # handle text
         isFollowupSelection = None
-        for selection in sels:
+        for selection in selections:
             if isFollowupSelection:
                 # split multi selections with ---
                 output += "---\n"
@@ -37,14 +37,21 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
                 # but not the first one
                 isFollowupSelection = True
             # for each selection
-            selection = self.view.line(selection)  # Extend selection to full lines
-            first_line_num = self.get_line_num(selection.begin())
-            lines = self.view.substr(selection).split("\n")  # Considers all line breaks
-            for i, line in enumerate(lines):
-                output += format_string % (first_line_num + i, line)
+            selection = self.view.line(selection)  # Extend selection to full line
+            firstLineNumberInSelection = self.getLineNumber(selection.begin())
+            linesInSelection = self.view.substr(selection).split("\n")  # Considers all line breaks
+            for i, line in enumerate(linesInSelection):
+                output += outputLineFormatString % (firstLineNumberInSelection + i, line)
 
-        # send to clipboard
+        # Send to clipboard
         sublime.set_clipboard(output)
 
-    def get_line_num(self, point):
+    def getLineNumber(self, point):
         return self.view.rowcol(point)[0] + 1
+
+    def removeAbsolutePath(self, fileName, folderList):
+        for folder in folderList:
+            if folder in fileName:
+                fileName = fileName.replace(folder, '')
+            break
+        return fileName
