@@ -1,8 +1,9 @@
 # Copy With Line Numbers Reloaded
 
 Use codes from:
- - https://github.com/freeella/copy_with_line_numbers.sublime-package
- - https://github.com/curiousstranger/copy_with_line_numbers.sublime-package
+
+  - https://github.com/freeella/copy_with_line_numbers.sublime-package
+  - https://github.com/curiousstranger/copy_with_line_numbers.sublime-package
 
 
 ## Example
