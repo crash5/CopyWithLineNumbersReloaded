@@ -2,8 +2,8 @@
 
 Use codes from:
 
-  - https://github.com/freeella/copy_with_line_numbers.sublime-package
-  - https://github.com/curiousstranger/copy_with_line_numbers.sublime-package
+* https://github.com/freeella/copy_with_line_numbers.sublime-package
+* https://github.com/curiousstranger/copy_with_line_numbers.sublime-package
 
 
 ## Example
@@ -29,6 +29,11 @@ File: /home/dev/projects/CopyWithLineNumbersReloaded/Main.sublime-menu
 25:                                 "caption": "Settings – Default"
 26:                             },
 ```
+
+
+## Screen rec. (thx Enteleform)
+
+![Multiple selection](https://crash5.github.io/CopyWithLineNumbersReloaded/multi_selection.gif)
 
 
 ## License
