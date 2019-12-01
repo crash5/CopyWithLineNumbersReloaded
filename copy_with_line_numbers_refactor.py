@@ -8,6 +8,7 @@ class Section(object):
         'lines'
     )
 
+
 class Selection(object):
     __slots__ = (
         'largest_line_number_length',
@@ -18,35 +19,30 @@ class Selection(object):
 
 
 def createOutput(selections: Selection) -> str:
-    output = selections.fileName + ":\n" if selections.fileName is not None else '<unsaved>'
+    output = str()
 
-    output += "\n".join(selections.sections[0].lines)
+    output += 'File: '
+    if selections.fileName:
+        output += selections.fileName
+    else:
+        output += '<unsaved>'
+    output += "\n"
 
-    for selection in selections.sections[1:]:
-        output += "\n---\n"
+
+    firstItem = True
+    for selection in selections.sections:
+        if not firstItem:
+            output += "---\n"
+        else:
+            firstItem = False
+
         for lineIndexInSelection, line in enumerate(selection.lines):
-            output += "%d: %s\n" % (selection.startLineNumber + lineIndexInSelection, line)
+            output += "%s: %s\n" % (selection.startLineNumber + lineIndexInSelection, line)
 
     return output
 
 
 class CopyWithLineNumbersRefactorCommand(sublime_plugin.TextCommand):
-    def file_name(self) -> str:
-        return self.view.file_name()
-
-    def folders(self) -> list:
-        return self.view.window().folders()
-
-    def set_clipboard(self, content: str) -> None:
-        sublime.set_clipboard(content)
-
-    def get_line_number(self, point) -> int:
-        return self.view.rowcol(point)[0] + 1
-
-    def largest_line_number_length(self) -> int:
-        largestLineNumber = self.get_line_number(self.view.sel()[-1].end())
-        return len(str(largestLineNumber))
-
     def selections(self) -> Selection:
         selections = self.view.sel()
 
@@ -67,7 +63,27 @@ class CopyWithLineNumbersRefactorCommand(sublime_plugin.TextCommand):
 
         return result
 
+    def largest_line_number_length(self) -> int:
+        largestLineNumber = self.get_line_number(self.view.sel()[-1].end())
+        return len(str(largestLineNumber))
 
-    def run(self, edit) -> None:
-        sublime.status_message(str('ok'))
-        self.set_clipboard(str(createOutput(self.selections())))
+    def get_line_number(self, point) -> int:
+        return self.view.rowcol(point)[0] + 1
+
+    def folders(self) -> list:
+        return self.view.window().folders()
+
+    def file_name(self) -> str:
+        return self.view.file_name()
+
+
+    def set_clipboard(self, content: str) -> None:
+        sublime.set_clipboard(content)
+
+
+    def run(self, edit):
+        selections = self.selections()
+
+        output = createOutput(selections)
+
+        self.set_clipboard(output)
