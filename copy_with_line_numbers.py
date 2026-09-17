@@ -68,5 +68,5 @@ class CopyWithLineNumbersCommand(sublime_plugin.TextCommand):
         for folder in folderList:
             if folder in fileName:
                 fileName = fileName.replace(folder, '')
-            break
+                break
         return fileName
